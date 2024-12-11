@@ -37,7 +37,7 @@ module "external_dns_helm" {
   irsa_tags                        = var.tags
 
   helm_release_name       = "external-dns"
-  helm_repo_url           = "https://charts.bitnami.com/bitnami"
+  helm_repo_url           = "oci://registry-1.docker.io/bitnamicharts/"
   helm_chart_name         = "external-dns"
   helm_create_namespace   = true
   namespace               = "external-dns"
