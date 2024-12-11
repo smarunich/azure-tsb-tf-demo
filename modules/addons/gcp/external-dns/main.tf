@@ -46,7 +46,7 @@ provider "helm" {
 
 resource "helm_release" "external_dns" {
   name             = "external-dns"
-  repository       = "https://charts.bitnami.com/bitnami"
+  repository       = "oci://registry-1.docker.io/bitnamicharts/"
   chart            = "external-dns"
   create_namespace = true
   namespace        = "external-dns"
