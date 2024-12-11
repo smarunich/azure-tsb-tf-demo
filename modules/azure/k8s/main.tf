@@ -18,10 +18,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   default_node_pool {
     name                = replace("${substr(var.cluster_name, 0, min(length("${var.cluster_name}"), 6))}", "-", "")
     zones               = [1]
+    node_count          = 3
     vnet_subnet_id      = var.vnet_subnet
-    enable_auto_scaling = true
-    min_count           = 2
-    max_count           = 7
     vm_size             = var.instance_type
     type                = "VirtualMachineScaleSets"
     os_disk_size_gb     = 50
