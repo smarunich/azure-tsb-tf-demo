@@ -9,8 +9,8 @@ terraform {
 
 provider "azurerm" {
   features {}
-
-  #https://github.com/hashicorp/terraform-provider-azurerm/issues/13776
+  subscription_id = "9a42948e-6087-47d2-bdb8-b530d558db22"
+  
   /* default_tags {
     tags = local.tags
   } */
