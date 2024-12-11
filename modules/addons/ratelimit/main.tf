@@ -15,7 +15,7 @@ resource "random_password" "redis" {
 resource "helm_release" "redis" {
   count            = var.enabled ? 1 : 0
   name             = "redis"
-  repository       = "https://charts.bitnami.com/bitnami"
+  repository       = "oci://registry-1.docker.io/bitnamicharts/"
   chart            = "redis"
   create_namespace = true
   namespace        = var.namespace
