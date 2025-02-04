@@ -281,7 +281,7 @@ Error: Error in function call
 
 ... ensure that the **name_prefix** only contains letters, numbers and underscores.
 
-### No such file or directory
+### Error: No such file or directory
 
 If you see the following error:
 
@@ -291,6 +291,48 @@ terraform output -json | jq . > ../../outputs/terraform_outputs/terraform-aws-ow
 ```
 
 ... create the directory (`mkdir outputs/terraform_outputs`) and repeat.
+
+### Error: Unable to find remote state
+
+If you see the following error when deploying the `tsb_mp` on EKS:
+
+```text
+Error: Unable to find remote state
+│
+│   with data.terraform_remote_state.k8s_auth,
+│   on main.tf line 8, in data "terraform_remote_state" "k8s_auth":
+│    8: data "terraform_remote_state" "k8s_auth" {
+│
+│ No stored state was found for the given workspace in the given backend.
+```
+
+... make sure to `export AWS_REGION=eu-west-2`, using the correct region.
+
+### Error: Failed to read variables file
+
+If you see the following error when deploying the `tsb_mp`:
+
+```text
+pushd tsb/fqdn/ > /dev/null
+
+.....
+╷
+│ Error: Failed to read variables file
+│
+│ Given variables file ../../../terraform.tfvars.json does not exist.
+```
+
+... the detection of the DNS provider has failed.  Add the following to your `terraform.tfvars.json`:
+
+```yaml
+    "tetrate": {
+        "dns_provider" : "aws"
+
+    }
+}
+```
+
+Valid values are `gcp`, `aws`, `azure`.
 
 ## Repository structure
 
