@@ -236,7 +236,36 @@ For a quicker destroy for development purposes, you can:
   as it does _not_ have the shared DNS suffix (gcp.sandbox.tetrate.io). In this case a public DNS zone will be
   created in the project for the configured DNS domain.
 
-### Repository structure
+## Troubleshooting
+
+### Error: Invalid provider configuration
+
+If you have an empty `aws` block (`"aws": []`), you may see the error:
+
+```text
+Error: Invalid provider configuration
+│
+│ Provider "registry.terraform.io/hashicorp/aws" requires explicit configuration. Add a provider block to the root
+│ module and configure the provider's required arguments as described in the provider documentation.
+```
+
+Follow the steps [here](https://stackoverflow.com/a/75626789); the easiest option is to `export AWS_REGION=eu-central-1`
+
+### Error: no matching Route 53 Hosted Zone found
+
+If you see the following error:
+
+```text
+Error: no matching Route 53 Hosted Zone found
+│
+│   with module.register_fqdn.data.aws_route53_zone.zone,
+│   on ../../../modules/aws/register_fqdn/main.tf line 1, in data "aws_route53_zone" "zone":
+│    1: data "aws_route53_zone" "zone" {
+```
+
+... check that the DNS name (for example `yourname.sandbox.tetrate.io`) can be managed from your AWS account.  You may need to select a different DNS root.
+
+## Repository structure
 
 | Directory | Description |
 | --------- | ----------- |
