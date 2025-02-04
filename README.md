@@ -265,6 +265,33 @@ Error: no matching Route 53 Hosted Zone found
 
 ... check that the DNS name (for example `yourname.sandbox.tetrate.io`) can be managed from your AWS account.  You may need to select a different DNS root.
 
+### Error: Error in function call
+
+If you see the following error:
+
+```text
+Error: Error in function call
+│
+│   on ../../modules/aws/base/main.tf line 93, in resource "local_file" "aws_cleanup":
+│   93:     name_prefix   = regex("^\\w+-\\d", "${var.name_prefix}")
+│     ├────────────────
+│     │ while calling regex(pattern, string)
+│     │ var.name_prefix is "owen-two-0-njtu"
+```
+
+... ensure that the **name_prefix** only contains letters, numbers and underscores.
+
+### No such file or directory
+
+If you see the following error:
+
+```text
+terraform output -json | jq . > ../../outputs/terraform_outputs/terraform-aws-owen1-eu-west-1-0.json
+/home/owen/src/one/tetrate-service-bridge-sandbox/make/helpers.sh: line 19: ../../outputs/terraform_outputs/terraform-aws-owen1-eu-west-1-0.json: No such file or directory
+```
+
+... create the directory (`mkdir outputs/terraform_outputs`) and repeat.
+
 ## Repository structure
 
 | Directory | Description |
